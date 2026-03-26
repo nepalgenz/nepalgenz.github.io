@@ -439,18 +439,20 @@
   line-height: 1.65;
 }
 
-/* Expandable detail — hidden by default */
+/* Expandable detail — CSS grid rows for smooth natural height */
 .timeline-detail {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.4s ease, opacity 0.3s ease, margin 0.3s ease;
-  opacity: 0;
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.35s ease, margin-top 0.35s ease;
   margin-top: 0;
 }
 
+.timeline-detail-inner {
+  overflow: hidden;
+}
+
 .timeline-item.expanded .timeline-detail {
-  max-height: 300px;
-  opacity: 1;
+  grid-template-rows: 1fr;
   margin-top: var(--space-sm);
 }
 
