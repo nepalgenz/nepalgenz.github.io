@@ -4,6 +4,10 @@ on:
   push:
     branches:
       - main
+  workflow_run:
+    workflows: ["Auto-merge PRs from trusted contributors"]
+    types:
+      - completed
 
 jobs:
   deploy:
