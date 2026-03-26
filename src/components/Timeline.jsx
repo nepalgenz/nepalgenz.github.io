@@ -130,6 +130,7 @@ const BBC_SEARCH = 'https://www.youtube.com/results?search_query=Shot+Like+Enemi
 export default function Timeline() {
   const { lang, t } = useLang()
   const itemRefs = useRef([])
+  const detailRefs = useRef([])
   const sectionRef = useRef(null)
   const scrubTrackRef = useRef(null)
   const [activeIdx, setActiveIdx] = useState(null)
@@ -287,8 +288,15 @@ export default function Timeline() {
                 <p className="timeline-desc">{lang === 'ne' ? ev.desc.ne : ev.desc.en}</p>
 
                 {/* Expanded detail */}
-                <div className="timeline-detail">
-                  <div className="timeline-detail-inner">
+                <div
+                  className="timeline-detail"
+                  style={{
+                    height: activeIdx === i && detailRefs.current[i]
+                      ? detailRefs.current[i].scrollHeight + 'px'
+                      : '0'
+                  }}
+                >
+                  <div ref={el => { detailRefs.current[i] = el }} className="timeline-detail-inner">
                     <p>{lang === 'ne' ? ev.detail.ne : ev.detail.en}</p>
                   </div>
                 </div>
