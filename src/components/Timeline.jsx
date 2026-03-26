@@ -200,7 +200,7 @@ export default function Timeline() {
         </div>
 
         {/* BBC Documentary */}
-        <div className="bbc-feature fade-in" ref={el => { if(el) itemRefs.current['bbc'] = el }}>
+        <div className="bbc-feature">
           <div className="bbc-feature-inner">
             <div className="bbc-icon">🎬</div>
             <div className="bbc-text">
@@ -221,7 +221,7 @@ export default function Timeline() {
         </div>
 
         {/* Casualties summary bar */}
-        <div className="casualties-bar fade-in" ref={el => { if(el) itemRefs.current['bar'] = el }}>
+        <div className="casualties-bar">
           <div className="cas-item danger">
             <span className="cas-num">76</span>
             <span className="cas-label">{t('कुल मृत्यु', 'Total Deaths')}</span>
