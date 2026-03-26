@@ -439,20 +439,19 @@
   line-height: 1.65;
 }
 
-/* Expandable detail — CSS grid rows for smooth natural height */
+/* Expandable detail — JS-measured height for reliable cross-browser animation */
 .timeline-detail {
-  display: grid;
-  grid-template-rows: 0fr;
-  transition: grid-template-rows 0.35s ease, margin-top 0.35s ease;
+  overflow: hidden;
+  height: 0;
+  transition: height 0.35s ease, margin-top 0.35s ease;
   margin-top: 0;
 }
 
 .timeline-detail-inner {
-  overflow: hidden;
+  /* inner wrapper so scrollHeight measures correctly */
 }
 
 .timeline-item.expanded .timeline-detail {
-  grid-template-rows: 1fr;
   margin-top: var(--space-sm);
 }
 
