@@ -133,8 +133,10 @@ export default function Timeline() {
   const sectionRef = useRef(null)
   const scrubTrackRef = useRef(null)
   const [activeIdx, setActiveIdx] = useState(null)
-  const [scrubPos, setScrubPos] = useState(0)
   const [isDragging, setIsDragging] = useState(false)
+  const scrubFillRef = useRef(null)
+  const scrubThumbRef = useRef(null)
+  const scrubPctRef = useRef(null)
 
   // Fade in on scroll — use lower threshold and re-observe after first render
   useEffect(() => {
@@ -154,14 +156,16 @@ export default function Timeline() {
     return () => { clearTimeout(timer); observer.disconnect() }
   }, [])
 
-  // Scrubber position synced to scroll
+  // Scrubber position synced to scroll — direct DOM updates, no re-renders
   useEffect(() => {
     const onScroll = () => {
       const section = sectionRef.current
       if (!section) return
       const { top, height } = section.getBoundingClientRect()
       const progress = Math.max(0, Math.min(100, (-top / Math.max(1, height - window.innerHeight)) * 100))
-      setScrubPos(progress)
+      if (scrubFillRef.current) scrubFillRef.current.style.width = `${progress}%`
+      if (scrubThumbRef.current) scrubThumbRef.current.style.left = `${progress}%`
+      if (scrubPctRef.current) scrubPctRef.current.textContent = `${Math.round(progress)}%`
     }
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
@@ -255,7 +259,7 @@ export default function Timeline() {
                 ref={scrubTrackRef}
                 onClick={(e) => scrubTo(e.clientX)}
               >
-                <div className="scrubber-fill" style={{ width: `${scrubPos}%` }} />
+                <div className="scrubber-fill" ref={scrubFillRef} style={{ width: '0%' }} />
                 {events.map((ev, i) => (
                   <button
                     key={i}
@@ -268,12 +272,13 @@ export default function Timeline() {
                 ))}
                 <div
                   className="scrubber-thumb"
-                  style={{ left: `${scrubPos}%` }}
+                  ref={scrubThumbRef}
+                  style={{ left: '0%' }}
                   onMouseDown={() => setIsDragging(true)}
                   onTouchMove={(e) => scrubTo(e.touches[0].clientX)}
                 />
               </div>
-              <span className="scrubber-pct">{Math.round(scrubPos)}%</span>
+              <span className="scrubber-pct" ref={scrubPctRef}>0%</span>
             </div>
           </div>
 
@@ -282,12 +287,11 @@ export default function Timeline() {
               key={i}
               ref={el => { if(el) itemRefs.current[i] = el }}
               className={`timeline-item ${ev.type} fade-in ${i % 2 === 0 ? 'left' : 'right'} ${activeIdx === i ? 'expanded' : ''}`}
-              onClick={() => toggleCard(i)}
             >
-              <div className={`timeline-dot ${ev.type}`}>
+              <div className={`timeline-dot ${ev.type}`} onClick={() => toggleCard(i)}>
                 <span className="dot-icon">{ev.icon}</span>
               </div>
-              <div className="timeline-content">
+              <div className="timeline-content" onClick={() => toggleCard(i)}>
                 <div className="timeline-date">{lang === 'ne' ? ev.date.ne : ev.date.en}</div>
                 <h4 className="timeline-title">{lang === 'ne' ? ev.title.ne : ev.title.en}</h4>
                 <p className="timeline-desc">{lang === 'ne' ? ev.desc.ne : ev.desc.en}</p>

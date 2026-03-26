@@ -190,7 +190,7 @@
   top: calc(50vh - 30px);
   transform: translateX(-50%);
   width: 300px;
-  pointer-events: all;
+  pointer-events: none;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -229,6 +229,7 @@
   background: var(--border-subtle);
   border-radius: 3px;
   cursor: pointer;
+  pointer-events: all;
 }
 
 .scrubber-fill {
@@ -329,6 +330,10 @@
   z-index: 7;
   width: 44%;
   margin-bottom: var(--space-xl);
+}
+
+.timeline-content,
+.timeline-dot {
   cursor: pointer;
 }
 
