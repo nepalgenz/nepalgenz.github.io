@@ -288,7 +288,9 @@ export default function Timeline() {
 
                 {/* Expanded detail */}
                 <div className="timeline-detail">
-                  <p>{lang === 'ne' ? ev.detail.ne : ev.detail.en}</p>
+                  <div className="timeline-detail-inner">
+                    <p>{lang === 'ne' ? ev.detail.ne : ev.detail.en}</p>
+                  </div>
                 </div>
 
                 <div className="timeline-footer">
