@@ -75,9 +75,9 @@ export default function Hero() {
         </div>
 
         <h1 className="hero-title">
-          <span className="hero-title-ne">कार्की आयोग प्रतिवेदन</span>
+          <span className="hero-title-ne">नेपाल जेनजेड आन्दोलन प्रतिवेदन २०८२</span>
           <span className="hero-title-divider">—</span>
-          <span className="hero-title-en">Karki Commission Report</span>
+          <span className="hero-title-en">Nepal GenZ Protest Report 2082</span>
         </h1>
 
         <p className="hero-subtitle">
