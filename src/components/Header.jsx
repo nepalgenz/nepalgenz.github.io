@@ -25,10 +25,10 @@ export default function Header({ onMenuToggle }) {
             <span />
           </button>
           <Link to="/" className="brand-link">
-            <div className="brand-emblem">का</div>
+            <div className="brand-emblem">ने</div>
             <div className="brand-text">
-              <span className="brand-title-ne">कार्की आयोग</span>
-              <span className="brand-title-en">Karki Commission Report</span>
+              <span className="brand-title-ne">नेपाल जेनजेड आन्दोलन प्रतिवेदन २०८२</span>
+              <span className="brand-title-en">Nepal GenZ Protest Report 2082</span>
             </div>
           </Link>
         </div>
