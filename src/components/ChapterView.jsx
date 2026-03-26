@@ -11,12 +11,70 @@ function findChapterById(id) {
   return allChapters.find(c => c.id === id)
 }
 
+function isHeading(line) {
+  const t = line.trim()
+  if (!t || t.length > 80) return false
+  if (/[।,;]$/.test(t)) return false
+  if (/^(अध्याय|भाग|खण्ड|परिच्छेद|Chapter|Part|Section|Annex|Appendix)/i.test(t)) return true
+  if (/^[०-९\d]+[\.\)]\s/.test(t)) return true
+  if (/^[A-Z][A-Z\s]{3,}$/.test(t)) return true
+  if (t.length <= 50 && !/[।\.!?]$/.test(t)) return true
+  return false
+}
+
+function headingLevel(line) {
+  if (/^(अध्याय|भाग|खण्ड|परिच्छेद|Chapter|Part)/i.test(line)) return 1
+  if (/^[०-९\d]+[\.\)]\s/.test(line)) return 2
+  if (/^[A-Z][A-Z\s]{3,}$/.test(line)) return 1
+  return 3
+}
+
+function renderPageContent(text) {
+  if (!text) return [<em key="empty" className="text-muted">[Empty page]</em>]
+
+  const lines = text.split('\n')
+  const elements = []
+  let paraLines = []
+
+  lines.forEach((line, i) => {
+    const trimmed = line.trim()
+    if (!trimmed) {
+      if (paraLines.length) {
+        elements.push({ type: 'p', text: paraLines.join(' '), key: `p-${i}` })
+        paraLines = []
+      }
+      return
+    }
+    if (isHeading(trimmed)) {
+      if (paraLines.length) {
+        elements.push({ type: 'p', text: paraLines.join(' '), key: `p-${i}` })
+        paraLines = []
+      }
+      elements.push({ type: 'h', text: trimmed, level: headingLevel(trimmed), key: `h-${i}` })
+    } else {
+      paraLines.push(trimmed)
+    }
+  })
+
+  if (paraLines.length) {
+    elements.push({ type: 'p', text: paraLines.join(' '), key: 'p-last' })
+  }
+
+  return elements.map(el => {
+    if (el.type === 'h') {
+      const Tag = el.level === 1 ? 'h2' : el.level === 2 ? 'h3' : 'h4'
+      return <Tag key={el.key} className={`content-h${el.level}`}>{el.text}</Tag>
+    }
+    return <p key={el.key}>{el.text}</p>
+  })
+}
+
 function PageText({ page, lang }) {
   if (!page) return null
   return (
     <div className={`page-block ${lang === 'ne' ? 'font-ne' : 'font-en'}`}>
       <span className="page-num">p. {page.page}</span>
-      <p>{page.text || <em className="text-muted">[Empty page]</em>}</p>
+      {renderPageContent(page.text)}
     </div>
   )
 }
