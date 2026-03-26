@@ -5,6 +5,28 @@
 .timeline-section {
   padding: var(--space-3xl) 0;
   background: var(--bg-secondary);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Background protest image — low opacity glass layer */
+.timeline-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('https://commons.wikimedia.org/wiki/Special:FilePath/2025_Nepalese_Gen_Z_movement_protesters_in_Chitwan_District_02.jpg');
+  background-size: cover;
+  background-position: center 40%;
+  background-attachment: fixed;
+  opacity: 0.08;
+  filter: grayscale(20%);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.timeline-section > .container {
+  position: relative;
+  z-index: 1;
 }
 
 /* ── BBC Feature ── */
@@ -145,33 +167,55 @@
   margin: 0 var(--space-lg);
 }
 
-/* ── Scrubber ── */
-.scrubber-wrap {
-  display: flex;
-  align-items: center;
-  gap: var(--space-md);
-  margin-bottom: var(--space-xl);
-  padding: var(--space-md) var(--space-lg);
-  background: var(--bg-card);
-  border: 1px solid var(--border-subtle);
-  border-radius: 8px;
+/* ── Centre-line Scrubber ── */
+
+/* Invisible full-height column sitting exactly on the centre line */
+.scrubber-center-wrapper {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 0;
+  z-index: 6;
+  pointer-events: none;
 }
 
-.scrubber-label {
-  font-size: 0.72rem;
-  color: var(--text-muted);
+/* Glassmorphism pill that sticks to viewport centre while scrolling */
+.scrubber-center-pill {
+  position: sticky;
+  top: calc(50vh - 30px);
+  transform: translateX(-50%);
+  width: 300px;
+  pointer-events: all;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background: rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  border-radius: 32px;
+  box-shadow: 0 4px 24px rgba(26,26,24,0.18), inset 0 1px 0 rgba(255,255,255,0.5);
+}
+
+.scrubber-pill-label {
+  font-size: 0.65rem;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.07em;
+  color: var(--text-secondary);
   white-space: nowrap;
   flex-shrink: 0;
 }
 
 .scrubber-pct {
-  font-size: 0.72rem;
+  font-size: 0.65rem;
   color: var(--text-muted);
   flex-shrink: 0;
-  min-width: 30px;
+  min-width: 26px;
   text-align: right;
+  font-weight: 600;
 }
 
 .scrubber-track {
@@ -483,5 +527,9 @@
   .casualties-bar { flex-direction: column; gap: var(--space-md); }
   .cas-divider { width: 48px; height: 1px; margin: 0 auto; }
 
-  .scrubber-wrap { flex-wrap: wrap; }
+  /* Hide centre scrubber on mobile — no centre line to anchor to */
+  .scrubber-center-wrapper { display: none; }
+
+  /* Background fixed attachment doesn't work well on iOS */
+  .timeline-section::before { background-attachment: scroll; }
 }
