@@ -29,6 +29,10 @@
   z-index: 1;
 }
 
+.timeline-section .section-header {
+  margin-bottom: var(--space-lg);
+}
+
 /* ── BBC Feature ── */
 .bbc-feature {
   background: linear-gradient(135deg, #1a1a18 0%, #2a2a26 100%);
