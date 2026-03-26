@@ -118,7 +118,7 @@
 
 .page-block {
   position: relative;
-  padding: var(--space-lg) 0;
+  padding: var(--space-xl) 0;
   border-bottom: 1px solid var(--border-subtle);
 }
 
@@ -130,8 +130,12 @@
   font-size: 1rem;
   line-height: 1.9;
   color: var(--text-primary);
-  white-space: pre-wrap;
   word-break: break-word;
+  margin-bottom: var(--space-md);
+}
+
+.page-block p:last-child {
+  margin-bottom: 0;
 }
 
 .page-block.font-ne p {
@@ -144,6 +148,53 @@
   font-family: var(--font-body-en);
   font-size: 1rem;
   line-height: 1.85;
+}
+
+/* ── Heading hierarchy inside chapter content ── */
+.page-block .content-h1 {
+  font-size: clamp(1.2rem, 2vw, 1.45rem);
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-top: var(--space-xl);
+  margin-bottom: var(--space-md);
+  padding-bottom: var(--space-sm);
+  border-bottom: 2px solid var(--accent-gold);
+  line-height: 1.3;
+}
+
+.page-block .content-h2 {
+  font-size: clamp(1.05rem, 1.8vw, 1.2rem);
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-top: var(--space-lg);
+  margin-bottom: var(--space-sm);
+  padding-left: var(--space-sm);
+  border-left: 3px solid var(--accent-gold);
+  line-height: 1.35;
+}
+
+.page-block .content-h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-top: var(--space-md);
+  margin-bottom: var(--space-xs);
+  line-height: 1.4;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.page-block.font-ne .content-h1,
+.page-block.font-ne .content-h2,
+.page-block.font-ne .content-h3 {
+  font-family: var(--font-body-ne);
+}
+
+/* First heading in a block needs no top margin */
+.page-block .content-h1:first-child,
+.page-block .content-h2:first-child,
+.page-block .content-h3:first-child {
+  margin-top: 0;
 }
 
 .page-num {
