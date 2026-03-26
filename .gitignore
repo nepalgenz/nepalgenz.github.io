@@ -1,7 +1,0 @@
-node_modules/
-dist/
-.DS_Store
-*.log
-# Large data files live in public/data/ — no need to track src/data/ copies
-src/data/pages_ne.json
-src/data/pages_en.json
