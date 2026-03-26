@@ -132,10 +132,10 @@ export default function Hero() {
 
       <div className="hero-photo-credit">
         Photo:{' '}
-        <a href="https://unsplash.com/@ev" target="_blank" rel="noopener noreferrer">
-          Ev
+        <a href="https://commons.wikimedia.org/wiki/File:2025_Nepalese_Gen_Z_movement_protesters_in_Chitwan_District_02.jpg" target="_blank" rel="noopener noreferrer">
+          Wikimedia Commons
         </a>{' '}
-        / Unsplash
+        · CC BY-SA 4.0
       </div>
     </section>
   )

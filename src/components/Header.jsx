@@ -6,6 +6,7 @@ import './Header.css'
 export default function Header({ onMenuToggle }) {
   const { lang, setLang, t } = useLang()
   const location = useLocation()
+  const [mobileOpen, setMobileOpen] = useState(false)
 
   const navLinks = [
     { to: '/', label: t('मुख्य पृष्ठ', 'Home') },
@@ -15,16 +16,30 @@ export default function Header({ onMenuToggle }) {
     { to: '/pdf', label: t('मूल PDF', 'Original PDF') },
   ]
 
+  function handleHamburger() {
+    setMobileOpen(o => !o)
+    onMenuToggle()
+  }
+
+  function handleMobileLinkClick() {
+    setMobileOpen(false)
+  }
+
   return (
     <header className="header">
       <div className="header-inner">
         <div className="header-brand">
-          <button className="menu-toggle" onClick={onMenuToggle} aria-label="Toggle navigation">
+          <button
+            className={`menu-toggle ${mobileOpen ? 'open' : ''}`}
+            onClick={handleHamburger}
+            aria-label="Toggle navigation"
+            aria-expanded={mobileOpen}
+          >
             <span />
             <span />
             <span />
           </button>
-          <Link to="/" className="brand-link">
+          <Link to="/" className="brand-link" onClick={handleMobileLinkClick}>
             <div className="brand-emblem">ने</div>
             <div className="brand-text">
               <span className="brand-title-ne">नेपाल जेनजेड आन्दोलन प्रतिवेदन २०८२</span>
@@ -57,6 +72,21 @@ export default function Header({ onMenuToggle }) {
           </button>
         </div>
       </div>
+
+      {mobileOpen && (
+        <nav className="mobile-nav">
+          {navLinks.map(link => (
+            <Link
+              key={link.to}
+              to={link.to}
+              className={`mobile-nav-link ${location.pathname === link.to ? 'active' : ''}`}
+              onClick={handleMobileLinkClick}
+            >
+              {link.label}
+            </Link>
+          ))}
+        </nav>
+      )}
     </header>
   )
 }
