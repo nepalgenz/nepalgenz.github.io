@@ -1,0 +1,261 @@
+/* ============================================================
+   Design System — Karki Aayog Pratibedan
+   Aesthetic: Editorial Documentary (warm parchment + authoritative)
+   ============================================================ */
+
+:root {
+  /* Colors */
+  --bg-primary:     #FAFAF7;
+  --bg-secondary:   #F2F0EB;
+  --bg-card:        #F7F5F0;
+  --bg-sidebar:     #EDEBE4;
+  --bg-dark:        #1A1A18;
+
+  --text-primary:   #1A1A18;
+  --text-secondary: #5C5A54;
+  --text-muted:     #8C8A84;
+  --text-inverse:   #FAFAF7;
+
+  --accent-red:     #B83232;
+  --accent-red-bg:  #FAF0F0;
+  --accent-gold:    #C9902A;
+  --accent-gold-bg: #FDF8F0;
+  --accent-blue:    #2A5FA8;
+
+  --border-subtle:  #D8D4C8;
+  --border-medium:  #C4BFB2;
+
+  /* Typography */
+  --font-display:   'Noto Serif Display', Georgia, serif;
+  --font-body-ne:   'Noto Sans Devanagari', sans-serif;
+  --font-body-en:   'Source Serif 4', Georgia, serif;
+  --font-mono:      'Menlo', 'Consolas', monospace;
+
+  /* Spacing */
+  --space-xs:  4px;
+  --space-sm:  8px;
+  --space-md:  16px;
+  --space-lg:  24px;
+  --space-xl:  40px;
+  --space-2xl: 64px;
+  --space-3xl: 96px;
+
+  /* Layout */
+  --sidebar-width: 280px;
+  --content-max:   780px;
+  --page-padding:  var(--space-lg);
+
+  /* Transitions */
+  --transition-fast:   0.15s ease;
+  --transition-medium: 0.3s ease;
+  --transition-slow:   0.5s ease;
+
+  /* Shadows */
+  --shadow-sm:  0 1px 3px rgba(26,26,24,0.08);
+  --shadow-md:  0 4px 12px rgba(26,26,24,0.10);
+  --shadow-lg:  0 8px 32px rgba(26,26,24,0.12);
+}
+
+/* ============ RESET & BASE ============ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-body-en);
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+body.lang-ne {
+  font-family: var(--font-body-ne);
+}
+
+a {
+  color: var(--accent-blue);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+img {
+  max-width: 100%;
+}
+
+/* ============ TYPOGRAPHY ============ */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  line-height: 1.25;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.lang-ne h1,
+.lang-ne h2,
+.lang-ne h3,
+.lang-ne h4 {
+  font-family: var(--font-body-ne);
+}
+
+p {
+  margin-bottom: var(--space-md);
+}
+
+/* ============ LAYOUT ============ */
+.app-layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.main-content {
+  flex: 1;
+  min-width: 0;
+  padding: 0;
+}
+
+/* ============ UTILITY CLASSES ============ */
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 var(--page-padding);
+}
+
+.text-muted { color: var(--text-muted); }
+.text-secondary { color: var(--text-secondary); }
+.text-red { color: var(--accent-red); }
+.text-gold { color: var(--accent-gold); }
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+}
+
+/* ============ SCROLL ANIMATIONS ============ */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============ CARD ============ */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  padding: var(--space-lg);
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow var(--transition-fast);
+}
+
+.card:hover {
+  box-shadow: var(--shadow-md);
+}
+
+/* ============ STAT CARD ============ */
+.stat-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  padding: var(--space-lg) var(--space-xl);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--accent-gold);
+}
+
+.stat-card.danger::before {
+  background: var(--accent-red);
+}
+
+.stat-number {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
+  font-weight: 700;
+  line-height: 1;
+  margin-bottom: var(--space-xs);
+}
+
+.stat-label {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 500;
+}
+
+/* ============ TRANSLATION BADGE ============ */
+.translation-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-family: var(--font-body-en);
+}
+
+/* ============ DIVIDER ============ */
+.divider {
+  border: none;
+  border-top: 1px solid var(--border-subtle);
+  margin: var(--space-xl) 0;
+}
+
+/* ============ SCROLLBAR ============ */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-medium);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 768px) {
+  :root {
+    --page-padding: var(--space-md);
+  }
+}

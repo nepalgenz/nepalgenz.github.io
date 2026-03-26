@@ -1,0 +1,14 @@
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.home-sections {
+  background: var(--bg-primary);
+}
+
+.report-layout {
+  display: flex;
+  min-height: calc(100vh - 60px);
+}
