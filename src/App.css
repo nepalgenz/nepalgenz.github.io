@@ -21,6 +21,7 @@
 }
 
 .visitor-counter {
-  height: 20px;
-  opacity: 0.75;
+  font-size: 13px;
+  opacity: 0.6;
+  color: var(--text-secondary, #888);
 }

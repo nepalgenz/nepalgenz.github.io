@@ -1,11 +1,20 @@
+import { useEffect, useState } from 'react'
+
 export default function Footer() {
+  const [count, setCount] = useState(null)
+
+  useEffect(() => {
+    fetch('https://api.counterapi.dev/v1/nepalgenz/visits/up')
+      .then(r => r.json())
+      .then(data => setCount(data.count))
+      .catch(() => setCount(null))
+  }, [])
+
   return (
     <footer className="site-footer">
-      <img
-        src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fnepalgenz.github.io&count_bg=%23C0392B&title_bg=%23555555&title=Visitors&edge_flat=true"
-        alt="Visitor Count"
-        className="visitor-counter"
-      />
+      <span className="visitor-counter">
+        👁 {count !== null ? count.toLocaleString() : '…'} visitors
+      </span>
     </footer>
   )
 }
