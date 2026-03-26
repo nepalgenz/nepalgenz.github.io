@@ -26,9 +26,9 @@
   --border-medium:  #C4BFB2;
 
   /* Typography */
-  --font-display:   'Noto Serif Display', Georgia, serif;
+  --font-display:   'Inter', system-ui, sans-serif;
   --font-body-ne:   'Noto Sans Devanagari', sans-serif;
-  --font-body-en:   'Source Serif 4', Georgia, serif;
+  --font-body-en:   'Inter', system-ui, sans-serif;
   --font-mono:      'Menlo', 'Consolas', monospace;
 
   /* Spacing */
