@@ -12,16 +12,14 @@
   position: absolute;
   inset: 0;
   background-image: url('https://commons.wikimedia.org/wiki/Special:FilePath/2025_Nepalese_Gen_Z_movement_protesters_in_Chitwan_District_02.jpg');
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center center;
+  background-size: cover;
+  background-position: center 20%;
   z-index: 0;
 }
 
 @media (max-width: 768px) {
   .hero-bg-image {
-    background-size: contain;
-    background-position: center top;
+    background-position: center 10%;
   }
 }
 
