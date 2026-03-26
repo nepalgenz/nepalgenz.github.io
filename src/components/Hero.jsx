@@ -17,7 +17,6 @@ function CountUp({ target, duration = 2000, suffix = '' }) {
           const tick = (now) => {
             const elapsed = now - start
             const progress = Math.min(elapsed / duration, 1)
-            // Ease out cubic
             const eased = 1 - Math.pow(1 - progress, 3)
             setValue(Math.round(eased * target))
             if (progress < 1) requestAnimationFrame(tick)
@@ -52,7 +51,7 @@ export default function Hero() {
     },
     {
       value: 85,
-      suffix: t(' करोड', ' Crore NPR'),
+      suffix: t(' करोड', ' Cr NPR'),
       label: t('भौतिक क्षति', 'Property Damage'),
       sub: t('अनुमानित', 'Estimated'),
       danger: false,
@@ -67,23 +66,28 @@ export default function Hero() {
 
   return (
     <section className="hero">
-      <div className="hero-bg-texture" />
+      <div className="hero-bg-image" />
+      <div className="hero-bg-overlay" />
 
       <div className="hero-inner container">
-        <div className="hero-badge">
-          {t('नेपाल सरकार | जाँचबुझ आयोग', 'Government of Nepal | Inquiry Commission')}
+        <div className="hero-eyebrow">
+          <span className="hero-pill">
+            {t('नेपाल सरकार', 'Government of Nepal')}
+          </span>
+          <span className="hero-pill hero-pill-muted">
+            {t('जाँचबुझ आयोग', 'Inquiry Commission')}
+          </span>
         </div>
 
         <h1 className="hero-title">
           <span className="hero-title-ne">नेपाल जेनजेड आन्दोलन प्रतिवेदन २०८२</span>
-          <span className="hero-title-divider">—</span>
           <span className="hero-title-en">Nepal GenZ Protest Report 2082</span>
         </h1>
 
         <p className="hero-subtitle">
           {t(
             '२०८२ भाद्र २३ र २४ गते भएका जेनजेड आन्दोलनसँग सम्बन्धित घटनाहरूको यथार्थ जाँचबुझ गरी पेश गरिएको प्रतिवेदन।',
-            'Official inquiry commission report documenting events of the GenZ protests of Bhadra 23-24, 2082 BS, including casualties, property damage, and recommendations for reform.'
+            'Official inquiry commission report documenting events of the GenZ protests of Bhadra 23–24, 2082 BS — casualties, property damage, and recommendations for reform.'
           )}
         </p>
 
@@ -95,7 +99,7 @@ export default function Hero() {
 
         <div className="hero-stats">
           {stats.map((stat, i) => (
-            <div key={i} className={`stat-card ${stat.danger ? 'danger' : ''}`} style={{ '--delay': `${i * 0.1}s` }}>
+            <div key={i} className={`hero-stat-card ${stat.danger ? 'danger' : ''}`} style={{ '--delay': `${i * 0.1}s` }}>
               <div className={`stat-number ${stat.danger ? 'text-red' : 'text-gold'}`}>
                 <CountUp target={stat.value} duration={2000 + i * 200} suffix={stat.suffix || ''} />
               </div>
@@ -107,12 +111,12 @@ export default function Hero() {
 
         <div className="hero-actions">
           <Link to="/report" className="btn-primary">
-            {t('प्रतिवेदन पढ्नुहोस्', 'Read the Report')}
+            {t('प्रतिवेदन पढ्नुहोस्', 'Read the Report')} →
           </Link>
-          <Link to="/statistics" className="btn-secondary">
+          <Link to="/statistics" className="btn-ghost">
             {t('तथ्याङ्क हेर्नुहोस्', 'View Statistics')}
           </Link>
-          <Link to="/pdf" className="btn-outline">
+          <Link to="/pdf" className="btn-ghost">
             {t('मूल PDF', 'Original PDF')}
           </Link>
         </div>
@@ -120,10 +124,18 @@ export default function Hero() {
         {lang === 'en' && (
           <div className="hero-disclaimer">
             <span className="translation-badge">
-              🔄 {t('', 'English text is machine-translated from the original Nepali. Refer to Original PDF for accuracy.')}
+              🔄 English text is machine-translated from the original Nepali. Refer to Original PDF for accuracy.
             </span>
           </div>
         )}
+      </div>
+
+      <div className="hero-photo-credit">
+        Photo:{' '}
+        <a href="https://unsplash.com/@ev" target="_blank" rel="noopener noreferrer">
+          Ev
+        </a>{' '}
+        / Unsplash
       </div>
     </section>
   )
