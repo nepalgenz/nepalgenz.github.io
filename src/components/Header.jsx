@@ -42,7 +42,7 @@ export default function Header({ onMenuToggle }) {
           <Link to="/" className="brand-link" onClick={handleMobileLinkClick}>
             <div className="brand-emblem">ने</div>
             <div className="brand-text">
-              <span className="brand-title-ne">नेपाल जेनजेड आन्दोलन प्रतिवेदन २०८२</span>
+              <span className="brand-title-ne">नेपाल जेन ज़ी आन्दोलन प्रतिवेदन २०८२</span>
               <span className="brand-title-en">Nepal GenZ Protest Report 2082</span>
             </div>
           </Link>

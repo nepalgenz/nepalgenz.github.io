@@ -80,13 +80,13 @@ export default function Hero() {
         </div>
 
         <h1 className="hero-title">
-          <span className="hero-title-ne">नेपाल जेनजेड आन्दोलन प्रतिवेदन २०८२</span>
+          <span className="hero-title-ne">नेपाल जेन ज़ी आन्दोलन प्रतिवेदन २०८२</span>
           <span className="hero-title-en">Nepal GenZ Protest Report 2082</span>
         </h1>
 
         <p className="hero-subtitle">
           {t(
-            '२०८२ भाद्र २३ र २४ गते भएका जेनजेड आन्दोलनसँग सम्बन्धित घटनाहरूको यथार्थ जाँचबुझ गरी पेश गरिएको प्रतिवेदन।',
+            '२०८२ भाद्र २३ र २४ गते भएका जेन ज़ी आन्दोलनसँग सम्बन्धित घटनाहरूको यथार्थ जाँचबुझ गरी पेश गरिएको प्रतिवेदन।',
             'Official inquiry commission report documenting events of the GenZ protests of Bhadra 23–24, 2082 BS — casualties, property damage, and recommendations for reform.'
           )}
         </p>

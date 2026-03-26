@@ -79,16 +79,21 @@
 .brand-title-ne {
   font-family: var(--font-body-ne);
   font-weight: 600;
-  font-size: 0.95rem;
+  font-size: 1.05rem;
   color: var(--text-primary);
 }
 
 .brand-title-en {
-  font-size: 0.7rem;
-  color: var(--text-muted);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text-primary);
   font-family: var(--font-body-en);
   letter-spacing: 0.02em;
 }
+
+/* Show only the language-appropriate brand title */
+.lang-ne .brand-title-en { display: none; }
+.lang-en .brand-title-ne { display: none; }
 
 .header-nav {
   display: flex;
@@ -217,8 +222,3 @@
   }
 }
 
-@media (max-width: 480px) {
-  .brand-title-en {
-    display: none;
-  }
-}

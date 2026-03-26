@@ -94,7 +94,7 @@
 
 .hero-title-ne {
   font-family: var(--font-body-ne);
-  font-size: clamp(1.75rem, 4.5vw, 3rem);
+  font-size: clamp(2.2rem, 5.5vw, 3.8rem);
   font-weight: 700;
   color: #ffffff;
   line-height: 1.2;
@@ -103,12 +103,16 @@
 
 .hero-title-en {
   font-family: var(--font-display);
-  font-size: clamp(1rem, 2.5vw, 1.5rem);
-  font-weight: 400;
-  color: rgba(255,255,255,0.55);
-  line-height: 1.3;
-  letter-spacing: 0.01em;
+  font-size: clamp(2.2rem, 5.5vw, 3.8rem);
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
 }
+
+/* Show only the language-appropriate title */
+.lang-ne .hero-title-en { display: none; }
+.lang-en .hero-title-ne { display: none; }
 
 /* ── Subtitle ─────────────────────────────────────────────── */
 .hero-subtitle {
