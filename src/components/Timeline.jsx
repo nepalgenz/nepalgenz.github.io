@@ -238,38 +238,39 @@ export default function Timeline() {
           </div>
         </div>
 
-        {/* Draggable scrubber */}
-        <div className="scrubber-wrap">
-          <span className="scrubber-label">{t('घटनाक्रम नेभिगेट गर्नुहोस्', 'Navigate timeline')}</span>
-          <div
-            className="scrubber-track"
-            ref={scrubTrackRef}
-            onClick={(e) => scrubTo(e.clientX)}
-          >
-            <div className="scrubber-fill" style={{ width: `${scrubPos}%` }} />
-            {events.map((ev, i) => (
-              <button
-                key={i}
-                className={`scrubber-marker ${ev.type}`}
-                style={{ left: `${(i / (events.length - 1)) * 100}%` }}
-                onClick={(e) => jumpToEvent(i, e)}
-                title={lang === 'ne' ? ev.title.ne : ev.title.en}
-              >
-                <span className="scrubber-tooltip">{lang === 'ne' ? ev.title.ne : ev.title.en}</span>
-              </button>
-            ))}
-            <div
-              className="scrubber-thumb"
-              style={{ left: `${scrubPos}%` }}
-              onMouseDown={() => setIsDragging(true)}
-              onTouchMove={(e) => scrubTo(e.touches[0].clientX)}
-            />
-          </div>
-          <span className="scrubber-pct">{Math.round(scrubPos)}%</span>
-        </div>
-
         {/* Timeline events */}
         <div className="timeline">
+          {/* Scrubber — sticky glass pill centred on the vertical line */}
+          <div className="scrubber-center-wrapper">
+            <div className="scrubber-center-pill">
+              <span className="scrubber-pill-label">{t('घटनाक्रम', 'Timeline')}</span>
+              <div
+                className="scrubber-track"
+                ref={scrubTrackRef}
+                onClick={(e) => scrubTo(e.clientX)}
+              >
+                <div className="scrubber-fill" style={{ width: `${scrubPos}%` }} />
+                {events.map((ev, i) => (
+                  <button
+                    key={i}
+                    className={`scrubber-marker ${ev.type}`}
+                    style={{ left: `${(i / (events.length - 1)) * 100}%` }}
+                    onClick={(e) => jumpToEvent(i, e)}
+                  >
+                    <span className="scrubber-tooltip">{lang === 'ne' ? ev.title.ne : ev.title.en}</span>
+                  </button>
+                ))}
+                <div
+                  className="scrubber-thumb"
+                  style={{ left: `${scrubPos}%` }}
+                  onMouseDown={() => setIsDragging(true)}
+                  onTouchMove={(e) => scrubTo(e.touches[0].clientX)}
+                />
+              </div>
+              <span className="scrubber-pct">{Math.round(scrubPos)}%</span>
+            </div>
+          </div>
+
           {events.map((ev, i) => (
             <div
               key={i}
