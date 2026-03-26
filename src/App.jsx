@@ -9,6 +9,7 @@ import Timeline from './components/Timeline'
 import ReportIndex from './components/ReportIndex'
 import ChapterView from './components/ChapterView'
 import PDFViewer from './components/PDFViewer'
+import Footer from './components/Footer'
 import './App.css'
 
 function HomePage() {
@@ -49,6 +50,7 @@ function AppContent() {
         <Route path="/pdf" element={<main><PDFViewer /></main>} />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
+      <Footer />
     </div>
   )
 }
