@@ -326,6 +326,7 @@
 
 .timeline-item {
   position: relative;
+  z-index: 7;
   width: 44%;
   margin-bottom: var(--space-xl);
   cursor: pointer;
@@ -386,6 +387,11 @@
   100% { transform: scale(1.6); opacity: 0; }
 }
 
+@keyframes detailFadeIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
 /* ── Card ── */
 .timeline-content {
   background: var(--bg-card);
@@ -439,20 +445,15 @@
   line-height: 1.65;
 }
 
-/* Expandable detail — JS-measured height for reliable cross-browser animation */
+/* Expandable detail — simple display toggle with fade */
 .timeline-detail {
-  overflow: hidden;
-  height: 0;
-  transition: height 0.35s ease, margin-top 0.35s ease;
-  margin-top: 0;
-}
-
-.timeline-detail-inner {
-  /* inner wrapper so scrollHeight measures correctly */
-}
-
-.timeline-item.expanded .timeline-detail {
+  display: none;
   margin-top: var(--space-sm);
+  animation: detailFadeIn 0.25s ease;
+}
+
+.timeline-detail.open {
+  display: block;
 }
 
 .timeline-detail p {

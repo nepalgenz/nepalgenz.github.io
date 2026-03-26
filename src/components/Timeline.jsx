@@ -130,23 +130,28 @@ const BBC_SEARCH = 'https://www.youtube.com/results?search_query=Shot+Like+Enemi
 export default function Timeline() {
   const { lang, t } = useLang()
   const itemRefs = useRef([])
-  const detailRefs = useRef([])
   const sectionRef = useRef(null)
   const scrubTrackRef = useRef(null)
   const [activeIdx, setActiveIdx] = useState(null)
   const [scrubPos, setScrubPos] = useState(0)
   const [isDragging, setIsDragging] = useState(false)
 
-  // Fade in on scroll
+  // Fade in on scroll — use lower threshold and re-observe after first render
   useEffect(() => {
     const observer = new IntersectionObserver(
       entries => entries.forEach(e => {
-        if (e.isIntersecting) e.target.classList.add('visible')
+        if (e.isIntersecting) {
+          e.target.classList.add('visible')
+          observer.unobserve(e.target)
+        }
       }),
-      { threshold: 0.15 }
+      { threshold: 0.05, rootMargin: '50px' }
     )
-    itemRefs.current.forEach(el => { if (el) observer.observe(el) })
-    return () => observer.disconnect()
+    // Small delay ensures refs and layout are fully settled
+    const timer = setTimeout(() => {
+      itemRefs.current.forEach(el => { if (el) observer.observe(el) })
+    }, 100)
+    return () => { clearTimeout(timer); observer.disconnect() }
   }, [])
 
   // Scrubber position synced to scroll
@@ -289,16 +294,9 @@ export default function Timeline() {
 
                 {/* Expanded detail */}
                 <div
-                  className="timeline-detail"
-                  style={{
-                    height: activeIdx === i && detailRefs.current[i]
-                      ? detailRefs.current[i].scrollHeight + 'px'
-                      : '0'
-                  }}
+                  className={`timeline-detail ${activeIdx === i ? 'open' : ''}`}
                 >
-                  <div ref={el => { detailRefs.current[i] = el }} className="timeline-detail-inner">
-                    <p>{lang === 'ne' ? ev.detail.ne : ev.detail.en}</p>
-                  </div>
+                  <p>{lang === 'ne' ? ev.detail.ne : ev.detail.en}</p>
                 </div>
 
                 <div className="timeline-footer">
